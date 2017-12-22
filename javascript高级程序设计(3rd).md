@@ -84,7 +84,7 @@ switch (a) {
 	console.log('是2');
 	break;
 }
-</pre>7
+</pre>
 <h2>函数</h2>
 <p>
 	函数的参数会集合在arguments对象（并不是array的实例），它是一个类数组，可以用arguments[0]去访问，也有arguments.length	
@@ -101,7 +101,7 @@ switch (a) {
 	unshift：将新的项从开始填入数组，返回新的数组的长度 <br>
 	sort：将数组排序，按第一项的编码来排序，返回修改后的新数组 <br>
 	reverse：将数组反转，返回修改后的新数组 <br>
-	上面的方法都会改变数组 <br>
+	<strong>上面的方法都会改变数组</strong> <br>
 </p>
 <h2>数组的方法 - 深入版</h2>
 <p>
@@ -132,4 +132,35 @@ a.splice(0,1) // [2, 3, '4', '5']
 //<strong>如果传入的第一个参数大于数字的长度不会做任何动作</strong>
 </pre>
 	如果传入参数，先删除项，再添加项，第二个参数可为0，即不删除任何项
+</p>
+<h1>函数</h1>
+<pre>
+var a = function() {
+	//code here..
+}
+//函数表达式定义函数
+function a() {
+	//code here..
+}
+//函数声明定义函数
+//两种方法唯一的区别就是一个是“解析器会率先解析函数声明使其可以在执行其他表达式可以调用”
+</pre>  
+<h2>三种基本包装类型 String Number Boolean</h2>                                          
+<p>
+<pre>
+var a = '11'
+//在申明一个字符串，会隐式的调用String构造函数，创建完销毁，再次调用a就不会是一个对象，而是一个字符串
+a.color = 'red'
+console.log(a.color) // undefined
+var b = new String('11')
+a.color = 'red'
+console.log(a.color) // red
+</pre>
+	再看一看Boolean构造一个布尔对象
+<pre>
+var a = new Boolean(false) 
+console.log( a && true)
+//返回的是true，因为左边的a别判定为一个对象，在布尔运算对象会被转换成true
+//所以一般不用Boolean的构造，直接申明 var a = true
+</pre>
 </p>
