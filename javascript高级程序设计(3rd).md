@@ -165,7 +165,7 @@ console.log( a && true)
 </pre>
 </p>
 <h2>location - 获取链接参数</h2>
-```
+```javascript
 function getParamas() {
 	var qs = (location.search.length > 0 ? location.search.substring(1) : ''),
 		args = {};
