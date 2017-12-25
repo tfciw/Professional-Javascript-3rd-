@@ -165,26 +165,49 @@ console.log( a && true)
 </pre>
 </p>
 <h2>location - 获取链接参数</h2>
-```javascript
-function getParamas() {
-	var qs = (location.search.length > 0 ? location.search.substring(1) : ''),
-		args = {};
-	var items = qs.length ? qs.split('&') : [];
-	var item = null,
-		name = null,
-		value = null,
-		i = 0,
-		len = items.length;
-	for(i=0;i<len;i++) {
-		item = items[i].split('=');
-		name = decodeURIComponent(item[0]);
-		value = decodeURIComponent(item[1]);
-		if(name.length) {
-			args[name] = value;
+<h2>location - reload - 重新刷新</h2>
+<p>
+	如果不传入参数默认为false，会先从缓存中读取，location.reload(true),从服务器刷新
+</p>
+<h2>navigator - plugins - 检测浏览器是否含有插件</h2>
+<pre>
+function hasPlugin(oPlugin) {
+	oPlugin = oPlugin.toLowerCase();
+	for( let i = 0; i < navigator.plugins.length; i++ ) {
+		if( navigator.plugins[i].name.toLowerCase().indexOf(oPlugin) > -1 ) {
+			return true;
 		}
 	}
-
-	return args;
+	return false;
 }
-console.log(getParamas())
-```
+console.log(hasPlugin('Flash')) // true
+</pre>
+<h2>classList</h2>
+<pre>
+// div class="demo div" id='demo' value='div#demo' /div
+var oDiv#demo = document.getElementById('demo')
+console.log(oDiv#demo.classList) //输出length:2, value:demo div, demo, div
+// 四个方法 add remove contains toggle
+// add: 添加类名，remove：删除类名
+// contains：检测是否含有类名，有返回true，无返回false
+// toggle：如果检测有该类名则删除，无则添加
+<strong>className 属性，是直接对整个类名串操作</strong> 
+</pre>
+<h2>自定义元素属性</h2>
+<p>
+	img src='' data-url='https://www.baidu.com/img/baidu_jgylogo3.gif' / <br>
+	上面是一个图片，src为空，我们可以用oImg.src来访问他的src属性，但是不能通oImg.data-url来获取这个自定义属性，所有自定义属性都放在oImg.dataset这个类数组集合，并且<strong>定义也必须以data-作为开头</strong>
+<pre>
+var oImg = document.getElementsByTagName('img')[0];
+oImg.src = oImg.dataset.url;
+</pre>
+</p>
+<h2>关于屏幕以及元素的一些宽高</h2>
+<pre>
+window.screen.width // 屏幕的宽度，（window是一个特殊的对象，即使不写window，也会先去找一遍window是否含有screen。不过为了语义更明确，后面都会加上）
+document.body.clientWidth //文本模型body的宽度，如果不清楚margin，不会算在内，padding会。
+obj.scrollWidth // 元素的实际宽高
+obj.offsetWidth // 元素的盒模型宽度 margin padding border width （转为怪异盒模型就是width margin）
+obj.clientWidth // 元素不加margin的宽度 
+obj.scrollTop // 元素被卷去的高度
+</pre>
